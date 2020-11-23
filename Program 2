@@ -1,0 +1,231 @@
+[14:48, 11/23/2020] nilesh: #include <stdio.h>
+#include <stdlib.h>
+struct Node{
+    int data;
+    struct Node *next;
+};
+int length;
+struct Node *head = NULL;
+struct Node *tail = NULL;
+
+int searchEle(int val){
+struct Node *temp;
+temp = head;
+int cnt = 0;
+
+while(temp->next!=NULL && temp->data != val){
+    temp = temp->next;
+    cnt = cnt+1;
+}
+    if(temp->next == NULL){
+        return -1;
+    }
+    else{
+    return cnt;
+    }
+}
+void insertEle(int val) {
+ struct Node *t;
+  t = (struct Node*)malloc(sizeof(struct Node));
+  t->data = val;
+  if(head == NULL){
+      head = tail = t;
+      tail->next = NULL;
+      length++;
+      return;
+  }
+   else if(val <= head->data){
+    t->next = head;
+    head = t;
+    length++;
+   }
+   else{
+    struct Node *temp;
+    temp = head;
+    while(temp->next!=…
+[14:49, 11/23/2020] Anubhav: thik bhai
+[15:00, 11/23/2020] nilesh: #include <stdio.h>
+#include <stdlib.h>
+struct Node{
+    int data;
+    struct Node *next;
+};
+
+int length;
+struct Node *head = NULL;
+struct Node *tail = NULL;
+
+int searchEle(int val){                                  //Search Function     
+    struct Node *temp;
+    temp = head;
+    int cnt = 0;
+
+    while(temp->next!=NULL && temp->data != val){
+        temp = temp->next;
+        cnt = cnt+1;
+        }
+
+    if(temp->data == val){
+        return cnt;
+        }
+    else{
+    return -1;
+    }
+}
+
+void insertEle() {                                        //Insert Function
+    printf("\nEnter The Element\n");
+    int val;
+    scanf("%d",&val);
+    struct Node *t;
+    t = (struct Node*)malloc(sizeof(struct Node));
+    t->data = val;
+
+    if(head == NULL){
+        head = tail = t;
+        tail->next = NULL;
+        length++;
+        return;
+        }
+
+    else if(val <= head->data){
+        t->next = head;
+        head = t;
+        length++;
+        }
+
+    else{
+        struct Node *temp;
+        temp = head;
+        while(temp->next!=NULL && temp->next->data<=t->data){
+            temp = temp->next;
+            }
+        t->next = temp->next;
+        temp->next = t;
+        length++;
+        }
+        printf("\n");
+}
+
+void deleteEle(){                                     //Delete Function
+    int val;
+    if(length == 0){
+        printf("\nList Is Empty\n");
+        }
+
+    else if(length == 1){
+        printf("\nEnter The Element\n");
+        scanf("%d",&val);
+        int idx;
+        idx = searchEle(val);
+        if(idx!=-1){
+            head = tail = NULL;
+            length--;
+            }
+        else{
+            printf("\nEntered Element Is Not Present In LinkedList\n");
+            }}
+
+ else {
+        printf("\nEnter The Element\n");
+        scanf("%d",&val);
+        int idx;
+        idx = searchEle(val);
+        if(idx == -1){
+          printf("\nEntered element Is Not Present In LinkedList\n");}
+
+        else{
+        if(idx == 0){
+            struct Node *temp1 = head;
+            head = temp1->next;
+            length--;
+            }
+
+        else if(idx == length-1){
+            struct Node *temp2 = head;
+            for(int i = 0; i<idx-1; i++){
+                 temp2 = temp2->next;
+                 }
+        temp2->next = NULL;
+        length--;
+        }
+
+        else{
+            struct Node *temp3 = head;
+            for(int i = 0; i<idx-1; i++){
+            temp3 = temp3->next;
+            }
+            temp3->next = temp3->next->next;
+            length--;
+        }
+     }
+   }
+}
+
+void display(struct Node *head){                     //Display Function
+    printf("\nDisplay Of LinkedList\n");
+    while(head){
+        printf("%d --> ",head->data);
+        head = head->next;
+        }
+    printf("NULL");
+    printf("\n");
+}
+
+int main() {
+
+    int choice;
+    while(choice!=5){
+        printf("Enter 1 For Insertion\n");
+        printf("Enter 2 For Deletion\n");
+        printf("Enter 3 For Searching an Element\n");
+        printf("Enter 4 For Display\n");
+        printf("Enter 5 For Quit\n");
+        scanf("%d",&choice);
+
+        switch(choice){
+        case 1:                                            //Insert Choice
+             insertEle();
+             printf("\n");
+        break;
+
+        case 2:                                          //Delete Choice
+            deleteEle();
+            printf("\n");
+        break;
+
+        case 3:                                        //Search Choice
+            printf("\nEnter The Element\n");
+            int val2;
+            scanf("%d",&val2);
+            int idx;
+            idx = searchEle(val2);
+            if(idx!=-1){
+                printf("%d Is At Index %d\n",val2,idx);
+                }
+            else{
+                printf("Entered Element Not Present In LinkedList\n");
+                }
+            printf("\n");
+        break;
+
+        case 4:                                //Display choice
+            if(length == 0){
+                printf("\nList Is Empty\n");
+                printf("\n");
+            }
+            else{
+                display(head);
+                printf("\n");
+            }
+        break;
+
+        case 5:                             //Exit Choice
+            exit(0);
+        break;
+
+        default:
+            printf("\nInvalid Input. Please Enter A Valid Input\n");
+        }}
+	return 0;
+}
