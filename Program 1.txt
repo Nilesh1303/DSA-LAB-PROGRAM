@@ -1,0 +1,139 @@
+#include<stdio.h>
+int arr[10],n;
+
+//Insert Function//
+void arr_insert(int val, int idx){
+    if(idx==n){
+        arr[n] = val
+  }
+    for(int i=n; i>=idx;i--){
+    arr[i]=arr[i-1];
+    }
+    arr[idx]=val;
+    n++;
+}
+//Delete Function
+void arr_delete(int idx){
+    for(int i=idx; i<n-1;i++){
+    arr[i]=arr[i+1];
+    }
+    n--;}
+//Find Index Function
+int index(int ele){
+    for (int i=0;i<n; i++){
+        if (arr[i] == ele){
+            return i;
+            break;
+ }
+    }
+    return -1;
+    }
+//Print Function
+void print(){
+    int i;
+    for(i=0;i<n;i++){
+    printf("%d ",arr[i])
+}
+    printf("\n");
+}
+int main(){
+    printf("Enter The Size Of Array\n");
+    scanf("%d",&n);
+    printf("Enter The Elements Of Array\n");
+    for(int i=0; i<n; i++){
+        scanf("%d",&arr[i]);
+    }
+    Printf(“\n”);
+    for(int i = 0; i<n; i++){
+        printf(“%d “,arr[i]);
+    }
+    printf(“\n”);
+    int choice;
+    while(choice!=5){
+        printf("\n");
+        printf("Enter 1 For Insertion\n");
+        printf("Enter 2 For Deletion\n");
+        printf("Enter 3 For Finding The Location\n");
+        printf("Enter 4 For Printing The Array\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+        case 1:        // Insert Choice
+            printf("\n");
+            printf("Enter 1 For Inserting The Element At Given Position\n");
+            printf("Enter 2 For Inserting The Element At End Of Array\n");
+            int insertion_choice;
+            scanf("%d",&insertion_choice);
+            if(insertion_choice==1){
+                printf("\n");
+                printf("Enter The Element\n");
+                int val;
+                scanf("%d",&val);
+                printf("\n");
+                printf("Enter The Index\n");
+                int idx;
+                scanf("%d",&idx);
+                arr_insert(val,idx);
+            }
+            else{
+                printf("\n");
+                printf("Enter The Element\n");
+                int val;
+                scanf("%d",&val);
+                arr_insert(val,n);
+            }
+            break;
+
+        case 2:        //Delete choice
+            printf("\n");
+            printf("Enter 1 For Deletting The Element By Position\n");
+            printf("Enter 2 For Deleting The Element By Value\n");
+            int deletion_choice;
+            scanf("%d",&deletion_choice);
+            if(deletion_choice==1){
+                printf("\n");
+                printf("Enter The Index\n");
+                int idx;
+                scanf("%d",&idx);
+                arr_delete(idx);}
+            else{
+                printf("\n");
+                printf("Enter The Element\n");
+                int ele;
+                scanf("%d",&ele);
+                int idx;
+                idx = index(ele);
+                if(idx!=-1){
+                    arr_delete(idx);
+                }
+                else{
+                    printf("Not Found\n");
+                }
+                }
+            break;
+       case 3:        // Find element choice
+            printf("\n");
+            printf("Enter The Element\n");
+            int ele;
+            scanf("%d",&ele);
+            int idx;
+            idx = index(ele);
+            if(idx!=-1){
+                printf("%d Is At Index %d\n",ele,idx);
+            }
+            else{
+                printf("Element Not Found\n");
+            }
+            break;
+        case 4:        //Print choice
+            printf("\n");
+            printf("Display Of Array\n");
+            print();
+        break;
+        case 5:        //Exit Choice
+            break;
+        default:printf("Invalid Choice.Please Enter A Valid From Given Choices");
+            }
+            }
+            return 0;
+}
